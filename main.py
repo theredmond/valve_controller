@@ -3,61 +3,80 @@ import tkinter as tk
 
 VALVES = [
     {
-        "name": "One"
+        "display_name": "One",
+        "default_on": 10,
+        "default_off": 50,
     },
     {
-        "name": "Two"
+        "display_name": "Two",
+        "default_on": 10,
+        "default_off": 50,
     },
     {
-        "name": "Three"
+        "display_name": "Three",
+        "default_on": 10,
+        "default_off": 50,
     },
     {
-        "name": "Four"
+        "display_name": "Four",
+        "default_on": 10,
+        "default_off": 50,
     },
     {
-        "name": "Five"
+        "display_name": "Five",
+        "default_on": 10,
+        "default_off": 50,
     },
     {
-        "name": "Six"
+        "display_name": "Six",
+        "default_on": 10,
+        "default_off": 50,
     },
     {
-        "name": "Seven"
+        "display_name": "Seven",
+        "default_on": 10,
+        "default_off": 50,
     },
     {
-        "name": "Eight"
+        "display_name": "Eight",
+        "default_on": 10,
+        "default_off": 50,
     },
     {
-        "name": "Nine"
+        "display_name": "Nine",
+        "default_on": 10,
+        "default_off": 50,
     },
     {
-        "name": "Ten"
+        "display_name": "Ten",
+        "default_on": 10,
+        "default_off": 50,
     },
 ]
 
 
 class ValveController:
-    def __init__(self, container, valve, idx):
-        self.valve = Valve(container, valve, idx)
+    def __init__(self):
+        self.valves = []
 
-        self.label = tk.Label(container, text=valve["name"])
-        self.label.grid(column=idx, row=1)
-
-        self.start_button = tk.Button(
-            container, text="Start Valve", command=self.valve.start_valve)
-        self.start_button.grid(column=idx, row=5)
-
-        self.stop_button = tk.Button(
-            container, text="Stop Valve", command=self.valve.stop_valve)
-        self.stop_button.grid(column=idx, row=6)
-
+    def add_valve(self, container, valve, idx):
+        self.valves.append(Valve(container, valve, idx))
+    
+    def start_valves(self):
+        # add logic here for valve control/management
+        pass
 
 class Valve:
     def __init__(self, container, valve, idx):
         self.container = container
-        self.name = valve["name"]
+        self.valve = valve
+        self.display_name = valve["display_name"]
         self.current_time = 0.0
         self.start_time = 0.0
         self.end_time = 0.0
+
+        self.label = tk.Label(container, text=self.display_name)
+        self.label.grid(column=idx, row=1)
 
         self.time_elapsed = tk.Label(container, text="0:00")
         self.time_elapsed.grid(column=idx, row=2)
@@ -70,7 +89,7 @@ class Valve:
         self.user_value.grid(column=idx, row=4)
 
     def start_valve(self):
-        print(f"Start valve: ", self.name)
+        print(f"Start valve: ", self.display_name)
         self.running = True
         self.running_time = (int(self.user_value.get().split(
             ':')[0]) * 60) + int(self.user_value.get().split(':')[1])
@@ -93,7 +112,7 @@ class Valve:
             self.container.after(1000, self.update_timer)
 
     def stop_valve(self):
-        print(f"Stop valve: ", self.name)
+        print(f"Stop valve: ", self.display_name)
         self.running = False
         self.time_elapsed.configure(text="0:00")
         self.time_remaining.configure(text="0:00")
@@ -110,8 +129,14 @@ class MainWindow:
         bottom_frame = tk.Frame(master)
         bottom_frame.pack(side=tk.BOTTOM)
 
+        valve_controller = ValveController()
+
         for idx, valve in enumerate(VALVES):
-            ValveController(valve_frame, valve, idx)
+            valve_controller.add_valve(valve_frame, valve, idx)
+
+        self.start_button = tk.Button(
+            bottom_frame, text="Start", command=valve_controller.start_valves())
+        self.start_button.pack()
 
         self.close_button = tk.Button(
             bottom_frame, text="Exit", command=master.quit)
