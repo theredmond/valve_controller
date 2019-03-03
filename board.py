@@ -1,3 +1,9 @@
+# Usage 
+# from board import Board
+# b = Board()
+# b.on(4)
+# b.off(4)
+
 import serial
 
 COMMANDS = [
@@ -52,8 +58,5 @@ class Board:
 
         if state == 'off':
             idx = idx + 1
-        print(idx)
 
         return COMMANDS[idx]
-
-print('hi')
