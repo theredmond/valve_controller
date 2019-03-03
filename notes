@@ -1,0 +1,9 @@
+ch340g - usb chip
+
+
+import serial
+ser = serial.Serial('/dev/tty.usbserial-1410')
+print(ser.name)         # check which port was really used
+ser.write(b'\x3A\x46\x45\x30\x35\x30\x30\x30\x37\x46\x46\x30\x30\x46\x37\x0D\x0A')
+ser.write(b'\x3A\x46\x45\x30\x35\x30\x30\x30\x37\x46\x46\x30\x30\x46\x37\x0D\x0A')     # write a string
+ser.close() 
