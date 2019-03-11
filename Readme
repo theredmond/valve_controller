@@ -1,0 +1,8 @@
+This is what the script needs to do:
+
+a) 3 tabs or distinct areas
+b) 1 for irrigation. 3 valves each with an on duration and an off duration. Each valve is 2 relays. one for the valve and one 
+    for the pump.
+c) 1 for lighting with an on time and duration - or alternatively a way to pull sunset/daylength times from the internet and then
+    add time to it for desired daylength. 
+d) 1 for climate. 3 or 4 on/duration timers that control the same two relays.
