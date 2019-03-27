@@ -7,3 +7,23 @@ print(ser.name)         # check which port was really used
 ser.write(b'\x3A\x46\x45\x30\x35\x30\x30\x30\x37\x46\x46\x30\x30\x46\x37\x0D\x0A')
 ser.write(b'\x3A\x46\x45\x30\x35\x30\x30\x30\x37\x46\x46\x30\x30\x46\x37\x0D\x0A')     # write a string
 ser.close() 
+
+
+For GUI: #updated 3/27
+3 total sections needed
+  - Watering/valves tab
+      - 3 different valves
+      - run time and delay time for each valve
+      - an on/off time for the whole watering system to run (ie doesnt water at night)
+      - easily modifiable. Times should be augmentable in real time
+      - need to be able to save the data, and read the times whenever the program is booted. 
+      
+   - Light controller
+      - on/off time
+      - potentially just add time to the daylength gathered from the internet
+      - on/off button
+      
+   - climate control
+      - turn on a switch for a given period of time, 3 times per day
+      -much like the valve tab, but for one switch instead of 3
+      - IE on at 10pm, run for 5 min, on at 12am run for 7 min, on at 4am run for 3 min. 
